@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML Tutorial</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <div id="contentwidth">
+            <div id="leftdiv">
+                <a href="index.html" id="logo">HORIZON CALENDAR</a>
+            </div>
+            <div id="rightdiv">
+                <a href="login.html" id="login">Sign in</a>
+
+                <a href="getStarted.html" id="create">Get Started ➡</a>
+            </div> 
+        </div>
+    </header>
+
+    <section id="first">
+        <div id="loginwidth">
+            <div id="centerdiv">
+                <h1>HORIZON</h1>
+            </div>
+
+            <div id="authelements">
+                <h1>Create account</h1>
+            </div>
+            <div id="authelements">
+                <p>email</p>
+
+                <textarea id="email"></textarea>
+            </div>
+            <div id="authelements">
+                <p>password</p>
+
+                <textarea id="password"></textarea>
+            </div>
+            <div id="centerdiv">
+                <button id="authbutton">Create Account</button>
+
+                <script>
+                    document.getElementById('authbutton').addEventListener('click', function() {
+                        const email = document.getElementById('email').value;
+                        const password = document.getElementById('password').value;
+
+                        const userData = { email: email, password: password };
+
+                        fetch('http://localhost:8080/api/auth', {  
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(userData)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Success:', data);
+                            window.location.href = 'dashboard.html';
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    });
+                </script>
+                
+            </div>
+        </div>
+    </section>
+</body>
+</html>
